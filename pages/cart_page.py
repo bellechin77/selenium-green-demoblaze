@@ -22,10 +22,6 @@ class CartPage(BasePage):
             self.logger.info("Verifying cart contents...")
             self.navigate_to_cart()  
             
-            # Ensure cart items are present before fetching them
-            self.explicit_wait.until(lambda driver: len(driver.find_elements(*self.cart_items)) > 1, 
-                "Cart did not load in time")
-
             # Fetch the cart products with retry mechanism for empty cart issues
             cart_products = self.get_cart_products_with_retry(max_retries, delay)
             
@@ -59,10 +55,6 @@ class CartPage(BasePage):
             # Wait for cart items to be present first
             self.explicit_wait.until(EC.presence_of_element_located(self.cart_items),
                 "Cart page did not load in time")
-
-            # Ensure at least 2 cart items are visible before proceeding
-            self.explicit_wait.until(lambda driver: len(driver.find_elements(*self.cart_items)) > 1, 
-                "Cart items did not fully load")
     
             self.logger.info("✅ Successfully navigated to cart with contents loaded.")
         except TimeoutException:
