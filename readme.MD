@@ -88,7 +88,7 @@ selenium_project/
 │
 │── conftest.py            # Pytest configuration and fixtures
 │── config.properties      # Configuration properties
-│── README.md              # Documentation
+│── readme.MD              # Documentation
 ```
 
 ---
